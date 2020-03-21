@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: seckill-oauth2
+  cloud:
+    nacos:
+      config:
+        server-addr: ys-nacos.com:8848
+        file-extension: yml
+      discovery:
+        server-addr: ys-nacos.com:8848
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# 开启 Feign 的 OKHttp 方式
+feign:
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false

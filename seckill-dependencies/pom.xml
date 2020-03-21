@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.9.RELEASE</version>
+    </parent>
+    <groupId>com.shuai</groupId>
+    <artifactId>seckill-dependencies</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>11</java.version>
+        <persistence-api.version>1.0</persistence-api.version>
+        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+        <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
+        <okhttp.version>4.0.1</okhttp.version>
+        <jackson-databind.version>2.9.9</jackson-databind.version>
+        <dubbo-serialization-kryo.version>2.7.3</dubbo-serialization-kryo.version>
+        <tk.mybatis.version>2.1.5</tk.mybatis.version>
+    </properties>
+
+    <modules>
+        <module>../seckill-api</module>
+        <module>../seckill-common</module>
+        <module>../seckill-gate</module>
+        <module>../seckill-provider</module>
+        <module>../seckill-consumer</module>
+        <module>../seckill-configuration</module>
+        <module>../seckill-data-updater</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- /spring cloud -->
+
+            <!-- utils -->
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${persistence-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-serialization-kryo</artifactId>
+                <version>${dubbo-serialization-kryo.version}</version>
+            </dependency>
+            <!-- /utils -->
+
+            <!-- tk.mybatis -->
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${tk.mybatis.version}</version>
+            </dependency>
+            <!-- /tk.mybatis -->
+
+            <!-- seckill-api -->
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-order-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-policy-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-prod-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-stock-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-user-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- /seckill-api -->
+
+            <!-- seckill-common -->
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-common-response</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-common-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- /seckill-common -->
+
+            <!-- seckill-configuration -->
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-configuration-feign</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- /seckill-configuration -->
+
+            <!-- seckill-consumer -->
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-order-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-policy-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-prod-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-stock-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-user-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- /seckill-consumer -->
+
+            <!-- seckill-provider -->
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-order-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-policy-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-prod-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-stock-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shuai</groupId>
+                <artifactId>seckill-user-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- /seckill-provider -->
+        </dependencies>
+    </dependencyManagement>
+</project>

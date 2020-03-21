@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: seckill-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: ys-nacos.com:8848
+        file-extension: yml
+      discovery:
+        server-addr: ys-nacos.com:8848
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
