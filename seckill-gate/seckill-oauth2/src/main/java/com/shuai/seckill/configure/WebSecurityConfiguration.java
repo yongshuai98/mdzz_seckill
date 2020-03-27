@@ -50,8 +50,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
-                .antMatchers("/login")
-                .antMatchers("/register");
+                .antMatchers("/auth/login")
+                .antMatchers("/auth/register");
     }
 
     @Override
@@ -62,7 +62,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 增加了授权访问配置
-                .antMatchers("/logout").hasAuthority("USER");
+                .antMatchers("/auth/logout").hasAuthority("USER");
     }
 
 }

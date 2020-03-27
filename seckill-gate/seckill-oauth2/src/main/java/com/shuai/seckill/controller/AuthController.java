@@ -3,7 +3,6 @@ package com.shuai.seckill.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shuai.seckill.dto.UserParam;
 import com.shuai.seckill.entity.User;
-import com.shuai.seckill.feignservice.FeignUserService;
 import com.shuai.seckill.response.ResponseResult;
 import com.shuai.seckill.response.ResponseResultMaker;
 import com.shuai.seckill.service.UserService;
@@ -18,8 +17,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -34,7 +35,8 @@ import java.util.Objects;
 @Slf4j
 @RefreshScope
 @RestController
-public class LoginController {
+@RequestMapping("/auth")
+public class AuthController {
 
     @Value("${oauth2.oauth_token_url}")
     private String oauthTokenUrl;
@@ -58,13 +60,26 @@ public class LoginController {
     private TokenStore tokenStore;
 
     @Resource
-    private FeignUserService feignUserService;
-
-    @Resource
     private ObjectMapper objectMapper;
 
     @Reference
     private UserService userService;
+
+    /**
+     * 用户登出
+     *
+     * @param request 接收到的用户请求
+     * @return 登出结果统一返回值
+     */
+    @GetMapping("/logout")
+    public ResponseResult<Void> logout(HttpServletRequest request) {
+        // 获取 token
+        String token = request.getParameter("access_token");
+        // 删除 token 以注销
+        OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
+        tokenStore.removeAccessToken(oAuth2AccessToken);
+        return ResponseResultMaker.makeOkResponse("用户已注销");
+    }
 
     /**
      * 用户注册
@@ -72,7 +87,7 @@ public class LoginController {
      * @param userParam 用户的注册信息
      * @return 反馈信息，用户是否注册成功
      */
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseResult<String> register(@RequestBody UserParam userParam) {
         User user = new User().setUsername(userParam.getUsername())
                 .setPassword(userParam.getPassword());
@@ -86,6 +101,12 @@ public class LoginController {
         return ResponseResultMaker.makeErrResponse("您早已注册，可直接登录");
     }
 
+    /**
+     * 用户登录
+     *
+     * @param userParam 登录参数：用户名、密码
+     * @return 登录结果的统一返回值
+     */
     @PostMapping("/login")
     public ResponseResult<Map<String, Object>> login(@RequestBody UserParam userParam) {
         // 判断用户名和账户的正确性
@@ -121,16 +142,6 @@ public class LoginController {
         }
 
         return ResponseResultMaker.makeOkResponse("欢迎您登录", map);
-    }
-
-    @PostMapping("/logout")
-    public ResponseResult<Void> logout(HttpServletRequest request) {
-        // 获取 token
-        String token = request.getParameter("access_token");
-        // 删除 token 以注销
-        OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
-        tokenStore.removeAccessToken(oAuth2AccessToken);
-        return ResponseResultMaker.makeOkResponse("用户已注销");
     }
 
     /**
