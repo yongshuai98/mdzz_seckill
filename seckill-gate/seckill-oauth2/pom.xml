@@ -15,10 +15,6 @@
         <!-- seckill -->
         <dependency>
             <groupId>com.shuai</groupId>
-            <artifactId>seckill-configuration-feign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.shuai</groupId>
             <artifactId>seckill-user-api</artifactId>
         </dependency>
         <dependency>
@@ -43,14 +39,6 @@
         <!-- /spring boot -->
 
         <!-- spring cloud -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-okhttp</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-dubbo</artifactId>
