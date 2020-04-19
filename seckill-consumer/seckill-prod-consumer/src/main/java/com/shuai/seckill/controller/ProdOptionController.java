@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProdOptionController {
 
     @Reference
-    ProdOptionService prodOptionService;
+    private ProdOptionService prodOptionService;
 
 }

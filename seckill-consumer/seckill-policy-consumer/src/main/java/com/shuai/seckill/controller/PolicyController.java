@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PolicyController {
 
     @Reference
-    PolicyService policyService;
+    private PolicyService policyService;
 
 }

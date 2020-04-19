@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class StockHistoryController {
 
     @Reference
-    StockHistoryService stockHistoryService;
+    private StockHistoryService stockHistoryService;
 
 }

@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProdImgController {
 
     @Reference
-    ProdImgService prodImgService;
+    private ProdImgService prodImgService;
 
 }

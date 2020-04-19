@@ -27,19 +27,19 @@ public class UserAddrController {
     private UserAddrService userAddrService;
 
     @GetMapping("{userAddrId}")
-    public ResponseResult<UserAddr> getByUserAddrId(@PathVariable Integer userAddrId) {
+    public ResponseResult<UserAddr> getUserAddr(@PathVariable Integer userAddrId) {
         UserAddr addr = userAddrService.getById(userAddrId);
         return ResponseResultMaker.makeOkResponse("操作成功", addr);
     }
 
     @GetMapping("/all/{userId}")
-    public ResponseResult<List<UserAddr>> getByUserId(@PathVariable Integer userId) {
+    public ResponseResult<List<UserAddr>> getUserAddrs(@PathVariable Integer userId) {
         List<UserAddr> addrs = userAddrService.getByUserId(userId);
         return ResponseResultMaker.makeOkResponse("操作成功", addrs);
     }
 
     @PutMapping
-    public ResponseResult<UserAddr> updateByUserAddrId(@RequestBody UserAddr userAddr) {
+    public ResponseResult<UserAddr> updateUserAddr(@RequestBody UserAddr userAddr) {
         if (userAddrService.updateByUserAddrId(userAddr) > 0) {
             UserAddr addrById = userAddrService.getById(userAddr.getId());
             return ResponseResultMaker.makeOkResponse("操作成功", addrById);
@@ -48,7 +48,7 @@ public class UserAddrController {
     }
 
     @DeleteMapping("{userAddrId}")
-    public ResponseResult<String> deleteByUserAddrId(@PathVariable Integer userAddrId) {
+    public ResponseResult<String> deleteUserAddr(@PathVariable Integer userAddrId) {
         if (userAddrService.deleteByUserAddrId(userAddrId) > 0) {
             return ResponseResultMaker.makeOkResponse("操作成功");
         }

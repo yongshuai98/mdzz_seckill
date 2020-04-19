@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     @Reference
-    OrderService orderService;
+    private OrderService orderService;
 }
