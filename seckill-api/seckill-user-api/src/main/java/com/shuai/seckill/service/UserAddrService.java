@@ -9,14 +9,44 @@ import java.util.List;
  */
 public interface UserAddrService {
 
+    /**
+     * 通过主键获取用户地址
+     *
+     * @param userAddrId 用户地址表主键
+     * @return {@link UserAddr}
+     */
     UserAddr getById(Integer userAddrId);
 
+    /**
+     * 通过用户主键获取该用户所有的用户地址
+     *
+     * @param userId 用户表主键
+     * @return {@link UserAddr}
+     */
     List<UserAddr> getByUserId(Integer userId);
 
+    /**
+     * 修改一个用户地址
+     *
+     * @param userAddr {@link UserAddr}
+     * @return 此操作对数据表记录的影响条数
+     */
     Integer updateByUserAddrId(UserAddr userAddr);
 
+    /**
+     * 删除一个用户地址
+     *
+     * @param userAddrId 要删除的用户地址的主键
+     * @return 此操作对数据表记录的影响条数
+     */
     Integer deleteByUserAddrId(Integer userAddrId);
 
+    /**
+     * 新增保存一个用户地址
+     *
+     * @param userAddr {@link UserAddr}
+     * @return 此操作对数据表记录的影响条数
+     */
     Integer saveUserAddr(UserAddr userAddr);
 
 }

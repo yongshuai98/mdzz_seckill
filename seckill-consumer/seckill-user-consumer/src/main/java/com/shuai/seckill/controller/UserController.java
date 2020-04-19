@@ -1,6 +1,6 @@
 package com.shuai.seckill.controller;
 
-import com.shuai.seckill.dto.MdzzUserDto;
+import com.shuai.seckill.dto.UserDto;
 import com.shuai.seckill.entity.User;
 import com.shuai.seckill.response.ResponseResult;
 import com.shuai.seckill.response.ResponseResultMaker;
@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,12 +28,12 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseResult<MdzzUserDto> info(HttpServletRequest request) {
+    public ResponseResult<UserDto> getInfo(HttpServletRequest request) {
         // 获取 token 对应的用户
         User user = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
         // 封装并返回结果
-        MdzzUserDto mdzzUserDto = new MdzzUserDto()
+        UserDto userDto = new UserDto()
                 .setUserId(user.getId())
                 .setUsername(user.getUsername())
                 .setAvatar(user.getHead())
@@ -39,8 +41,26 @@ public class UserController {
                 .setToken(request.getParameter("access_token"))
                 .setRole(user.getRole());
 
-        return ResponseResultMaker.makeOkResponse("获取用户信息成功", mdzzUserDto);
+        return ResponseResultMaker.makeOkResponse("操作成功", userDto);
     }
 
+    @PutMapping
+    public ResponseResult<UserDto> updateUser(@RequestBody User user, HttpServletRequest request) {
+        // 修改用户信息
+        Integer result = userService.updateUserById(user);
+        if (result > 0) {
+            User userById = userService.getUserById(user.getId());
+            // 封装并返回结果
+            UserDto userDto = new UserDto()
+                    .setUserId(userById.getId())
+                    .setUsername(userById.getUsername())
+                    .setAvatar(userById.getHead())
+                    .setNickname(userById.getNickname())
+                    .setToken(request.getParameter("access_token"))
+                    .setRole(userById.getRole());
+            return ResponseResultMaker.makeOkResponse("操作成功", userDto);
+        }
+        return ResponseResultMaker.makeErrResponse("操作失败");
+    }
 
 }

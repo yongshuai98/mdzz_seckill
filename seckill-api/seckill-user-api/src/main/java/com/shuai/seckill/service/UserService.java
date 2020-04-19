@@ -31,4 +31,12 @@ public interface UserService {
      */
     User getUserByUsername(String username);
 
+    /**
+     * 根据用户主键获取用户
+     *
+     * @param userId 用户表主键
+     * @return {@link User}
+     */
+    User getUserById(Integer userId);
+
 }

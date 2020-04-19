@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class MdzzUserDto implements Serializable {
+public class UserDto implements Serializable {
 
     private Integer userId;
 

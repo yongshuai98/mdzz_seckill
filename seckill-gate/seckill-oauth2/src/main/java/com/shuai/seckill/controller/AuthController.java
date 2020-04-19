@@ -75,10 +75,10 @@ public class AuthController {
     public ResponseResult<Void> logout(HttpServletRequest request) {
         // 获取 token
         String token = request.getParameter("access_token");
-        // 删除 token 以注销
+        // 删除 token 以退出登录
         OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
         tokenStore.removeAccessToken(oAuth2AccessToken);
-        return ResponseResultMaker.makeOkResponse("用户已注销");
+        return ResponseResultMaker.makeOkResponse("用户已退出登录");
     }
 
     /**

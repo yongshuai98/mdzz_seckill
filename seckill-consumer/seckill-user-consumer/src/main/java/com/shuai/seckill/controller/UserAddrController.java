@@ -26,37 +26,42 @@ public class UserAddrController {
     @Reference
     private UserAddrService userAddrService;
 
-    @GetMapping("/get/{userAddrId}")
-    public UserAddr getByUserAddrId(@PathVariable Integer userAddrId) {
-        return userAddrService.getById(userAddrId);
+    @GetMapping("{userAddrId}")
+    public ResponseResult<UserAddr> getByUserAddrId(@PathVariable Integer userAddrId) {
+        UserAddr addr = userAddrService.getById(userAddrId);
+        return ResponseResultMaker.makeOkResponse("操作成功", addr);
     }
 
     @GetMapping("/all/{userId}")
     public ResponseResult<List<UserAddr>> getByUserId(@PathVariable Integer userId) {
-        return ResponseResultMaker.makeOkResponse("获取地址列表成功", userAddrService.getByUserId(userId));
+        List<UserAddr> addrs = userAddrService.getByUserId(userId);
+        return ResponseResultMaker.makeOkResponse("操作成功", addrs);
     }
 
-    @PutMapping("/update")
-    public String updateByUserAddrId(@RequestBody UserAddr userAddr) {
+    @PutMapping
+    public ResponseResult<UserAddr> updateByUserAddrId(@RequestBody UserAddr userAddr) {
         if (userAddrService.updateByUserAddrId(userAddr) > 0) {
-            return "修改成功";
+            UserAddr addrById = userAddrService.getById(userAddr.getId());
+            return ResponseResultMaker.makeOkResponse("操作成功", addrById);
         }
-        return "修改失败";
+        return ResponseResultMaker.makeErrResponse("操作失败");
     }
 
-    @DeleteMapping("/delete/{userAddrId}")
-    public String deleteByUserAddrId(@PathVariable Integer userAddrId) {
+    @DeleteMapping("{userAddrId}")
+    public ResponseResult<String> deleteByUserAddrId(@PathVariable Integer userAddrId) {
         if (userAddrService.deleteByUserAddrId(userAddrId) > 0) {
-            return "删除成功";
+            return ResponseResultMaker.makeOkResponse("操作成功");
         }
-        return "删除失败";
+        return ResponseResultMaker.makeErrResponse("操作失败");
     }
 
-    @PostMapping("/insert")
-    public String insertUserAddr(@RequestBody UserAddr userAddr) {
+    @PostMapping
+    public ResponseResult<List<UserAddr>> insertUserAddr(@RequestBody UserAddr userAddr) {
         if (userAddrService.saveUserAddr(userAddr) > 0) {
-            return "增加成功";
+            List<UserAddr> addrs = userAddrService.getByUserId(userAddr.getUserId());
+            return ResponseResultMaker.makeOkResponse("操作成功", addrs);
         }
-        return "增加失败";
+        return ResponseResultMaker.makeErrResponse("操作失败");
     }
+
 }
