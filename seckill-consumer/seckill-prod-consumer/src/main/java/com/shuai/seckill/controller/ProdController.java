@@ -4,7 +4,6 @@ import com.shuai.seckill.entity.Prod;
 import com.shuai.seckill.response.ResponseResult;
 import com.shuai.seckill.response.ResponseResultMaker;
 import com.shuai.seckill.service.ProdService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +19,6 @@ import java.util.List;
 /**
  * @author yongshuai
  */
-@Slf4j
 @RequestMapping("prod")
 @RestController
 public class ProdController {
@@ -29,40 +27,44 @@ public class ProdController {
     private ProdService prodService;
 
     @PostMapping
-    public String insertProd(@RequestBody Prod prod) {
+    public ResponseResult<Prod> insertProd(@RequestBody Prod prod) {
         if (prodService.saveProd(prod) > 0) {
-            return "插入成功";
+            Prod prodById = prodService.getProdById(prod.getId());
+            return ResponseResultMaker.makeOkResponse("操作成功", prodById);
         }
-        return "插入失败";
+        return ResponseResultMaker.makeErrResponse("操作失败");
     }
 
     @GetMapping("{prodId}")
-    public ResponseResult<Prod> getProdById(@PathVariable String prodId) {
-        return ResponseResultMaker
-                .makeOkResponse("获取商品成功", prodService.getProdById(Integer.parseInt(prodId)));
+    public ResponseResult<Prod> getProd(@PathVariable String prodId) {
+        Prod prodById = prodService.getProdById(Integer.parseInt(prodId));
+        if (prodById != null) {
+            return ResponseResultMaker.makeOkResponse("操作成功", prodById);
+        }
+        return ResponseResultMaker.makeErrResponse("操作失败");
     }
 
     @GetMapping("list")
     public ResponseResult<List<Prod>> getAllProd() {
         List<Prod> allProd = prodService.getAllProd();
-        log.info(allProd + "");
-        return ResponseResultMaker.makeOkResponse("获取商品列表成功", allProd);
+        return ResponseResultMaker.makeOkResponse("操作成功", allProd);
     }
 
     @DeleteMapping("{prodId}")
-    public String deleteProd(@PathVariable Integer prodId) {
+    public ResponseResult<String> deleteProd(@PathVariable Integer prodId) {
         if (prodService.deleteProdById(prodId) > 0) {
-            return "删除成功";
+            return ResponseResultMaker.makeOkResponse("操作成功");
         }
-        return "删除失败";
+        return ResponseResultMaker.makeErrResponse("操作失败");
     }
 
     @PutMapping
-    public String updateProd(@RequestBody Prod prod) {
+    public ResponseResult<Prod> updateProd(@RequestBody Prod prod) {
         if (prodService.updateProdById(prod) > 0) {
-            return "修改成功";
+            Prod prodById = prodService.getProdById(prod.getId());
+            return ResponseResultMaker.makeOkResponse("操作成功", prodById);
         }
-        return "修改失败";
+        return ResponseResultMaker.makeErrResponse("操作失败");
     }
 
 }
