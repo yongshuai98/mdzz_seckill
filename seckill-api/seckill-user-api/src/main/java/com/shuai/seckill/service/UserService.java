@@ -19,9 +19,9 @@ public interface UserService {
      * 修改用户信息
      *
      * @param user {@link User}
-     * @return 大于 0 则表示修改成功
+     * @return {@link User} 返回修改成功的用户
      */
-    Integer updateUserById(User user);
+    User updateUserById(User user);
 
     /**
      * 根据用户账户获取用户

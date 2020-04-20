@@ -47,20 +47,16 @@ public class UserController {
     @PutMapping
     public ResponseResult<UserDto> updateUser(@RequestBody User user, HttpServletRequest request) {
         // 修改用户信息
-        Integer result = userService.updateUserById(user);
-        if (result > 0) {
-            User userById = userService.getUserById(user.getId());
-            // 封装并返回结果
-            UserDto userDto = new UserDto()
-                    .setUserId(userById.getId())
-                    .setUsername(userById.getUsername())
-                    .setAvatar(userById.getHead())
-                    .setNickname(userById.getNickname())
-                    .setToken(request.getParameter("access_token"))
-                    .setRole(userById.getRole());
-            return ResponseResultMaker.makeOkResponse("操作成功", userDto);
-        }
-        return ResponseResultMaker.makeErrResponse("操作失败");
+        User userById = userService.updateUserById(user);
+        // 封装并返回结果
+        return ResponseResultMaker.makeOkResponse("操作成功",
+                new UserDto().setUserId(userById.getId())
+                        .setUsername(userById.getUsername())
+                        .setAvatar(userById.getHead())
+                        .setNickname(userById.getNickname())
+                        .setToken(request.getParameter("access_token"))
+                        .setRole(userById.getRole())
+        );
     }
 
 }

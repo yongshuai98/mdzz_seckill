@@ -21,6 +21,12 @@
     </modules>
 
     <dependencies>
+        <!-- seckill -->
+        <dependency>
+            <groupId>com.shuai</groupId>
+            <artifactId>seckill-common-utils</artifactId>
+        </dependency>
+        <!-- /seckill -->
         <!-- Redis 缓存-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

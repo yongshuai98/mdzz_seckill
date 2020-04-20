@@ -1,6 +1,8 @@
 package com.shuai.seckill.service;
 
 import com.shuai.seckill.entity.User;
+import com.shuai.seckill.exceptions.ApiException;
+import com.shuai.seckill.exceptions.Result;
 import com.shuai.seckill.mapper.dao.UserMapper;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,8 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer updateUserById(User user) {
-        return userMapper.updateByPrimaryKeySelective(user);
+    public User updateUserById(User user) {
+        if (userMapper.updateByPrimaryKeySelective(user) > 0) {
+            return userMapper.selectByPrimaryKey(user.getId());
+        }
+        throw new ApiException(Result.UPDATE_FAILED);
     }
 
     @Override

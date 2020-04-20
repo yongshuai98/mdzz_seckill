@@ -13,17 +13,17 @@ public interface ProdService {
      * 增加商品
      *
      * @param prod 要增加的商品信息
-     * @return 增加结果
+     * @return {@link Prod} 返回新增的记录
      */
-    Integer saveProd(Prod prod);
+    Prod saveProd(Prod prod);
 
     /**
      * 根据 prodId 修改商品
      *
      * @param prod 要修改的商品信息
-     * @return 修改结果
+     * @return {@link Prod} 返回被修改的记录
      */
-    Integer updateProdById(Prod prod);
+    Prod updateProdById(Prod prod);
 
     /**
      * 根据 prodId 删除商品

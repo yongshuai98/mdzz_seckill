@@ -27,12 +27,9 @@ public class ProdController {
     private ProdService prodService;
 
     @PostMapping
-    public ResponseResult<Prod> insertProd(@RequestBody Prod prod) {
-        if (prodService.saveProd(prod) > 0) {
-            Prod prodById = prodService.getProdById(prod.getId());
-            return ResponseResultMaker.makeOkResponse("操作成功", prodById);
-        }
-        return ResponseResultMaker.makeErrResponse("操作失败");
+    public ResponseResult<Prod> saveProd(@RequestBody Prod prod) {
+        Prod save = prodService.saveProd(prod);
+        return ResponseResultMaker.makeOkResponse("操作成功", save);
     }
 
     @GetMapping("{prodId}")
@@ -60,11 +57,8 @@ public class ProdController {
 
     @PutMapping
     public ResponseResult<Prod> updateProd(@RequestBody Prod prod) {
-        if (prodService.updateProdById(prod) > 0) {
-            Prod prodById = prodService.getProdById(prod.getId());
-            return ResponseResultMaker.makeOkResponse("操作成功", prodById);
-        }
-        return ResponseResultMaker.makeErrResponse("操作失败");
+        Prod update = prodService.updateProdById(prod);
+        return ResponseResultMaker.makeOkResponse("操作成功", update);
     }
 
 }

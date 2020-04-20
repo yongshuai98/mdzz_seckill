@@ -29,9 +29,9 @@ public interface UserAddrService {
      * 修改一个用户地址
      *
      * @param userAddr {@link UserAddr}
-     * @return 此操作对数据表记录的影响条数
+     * @return {@link UserAddr} 修改成功后将修改的用户地址返回
      */
-    Integer updateByUserAddrId(UserAddr userAddr);
+    UserAddr updateByUserAddrId(UserAddr userAddr);
 
     /**
      * 删除一个用户地址
@@ -45,8 +45,8 @@ public interface UserAddrService {
      * 新增保存一个用户地址
      *
      * @param userAddr {@link UserAddr}
-     * @return 此操作对数据表记录的影响条数
+     * @return {@link UserAddr} 新增成功后将新增的用户地址返回
      */
-    Integer saveUserAddr(UserAddr userAddr);
+    UserAddr saveUserAddr(UserAddr userAddr);
 
 }

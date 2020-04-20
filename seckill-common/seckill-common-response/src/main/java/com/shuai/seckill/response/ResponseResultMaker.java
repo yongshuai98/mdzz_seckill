@@ -70,11 +70,6 @@ public class ResponseResultMaker {
         public static final Integer USER_NOT_FOUND = 50010;
 
         /**
-         * 已在其他客户端登录
-         */
-        public static final Integer OTHER_CLIENTS_LOGGED_IN = 50012;
-
-        /**
          * token 已过期
          */
         public static final Integer TOKEN_EXPIRED = 50014;

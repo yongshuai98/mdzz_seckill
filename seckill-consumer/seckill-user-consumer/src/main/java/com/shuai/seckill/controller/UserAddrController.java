@@ -40,11 +40,8 @@ public class UserAddrController {
 
     @PutMapping
     public ResponseResult<UserAddr> updateUserAddr(@RequestBody UserAddr userAddr) {
-        if (userAddrService.updateByUserAddrId(userAddr) > 0) {
-            UserAddr addrById = userAddrService.getById(userAddr.getId());
-            return ResponseResultMaker.makeOkResponse("操作成功", addrById);
-        }
-        return ResponseResultMaker.makeErrResponse("操作失败");
+        UserAddr update = userAddrService.updateByUserAddrId(userAddr);
+        return ResponseResultMaker.makeOkResponse("操作成功", update);
     }
 
     @DeleteMapping("{userAddrId}")
@@ -57,11 +54,9 @@ public class UserAddrController {
 
     @PostMapping
     public ResponseResult<List<UserAddr>> insertUserAddr(@RequestBody UserAddr userAddr) {
-        if (userAddrService.saveUserAddr(userAddr) > 0) {
-            List<UserAddr> addrs = userAddrService.getByUserId(userAddr.getUserId());
-            return ResponseResultMaker.makeOkResponse("操作成功", addrs);
-        }
-        return ResponseResultMaker.makeErrResponse("操作失败");
+        userAddr = userAddrService.saveUserAddr(userAddr);
+        List<UserAddr> addrs = userAddrService.getByUserId(userAddr.getUserId());
+        return ResponseResultMaker.makeOkResponse("操作成功", addrs);
     }
 
 }
