@@ -56,6 +56,7 @@ public class ProdServiceImpl implements ProdService {
     }
 
     @Override
+    @Cacheable
     public List<Prod> getAllProd() {
         return prodMapper.selectAll();
     }

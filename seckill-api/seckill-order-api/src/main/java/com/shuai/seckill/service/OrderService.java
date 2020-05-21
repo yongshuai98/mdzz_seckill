@@ -3,13 +3,14 @@ package com.shuai.seckill.service;
 import com.shuai.seckill.entity.Order;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author yongshuai
  */
 public interface OrderService {
 
-    Integer saveOrder(Order order);
+    void saveOrder(Map<String, Object> orderMap);
 
     Integer updateById(Order order);
 
