@@ -19,7 +19,7 @@
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
         <okhttp.version>4.0.1</okhttp.version>
-        <jackson-databind.version>2.9.9</jackson-databind.version>
+        <jackson-databind.version>2.9.10.7</jackson-databind.version>
         <dubbo-serialization-kryo.version>2.7.3</dubbo-serialization-kryo.version>
         <tk.mybatis.version>2.1.5</tk.mybatis.version>
     </properties>
